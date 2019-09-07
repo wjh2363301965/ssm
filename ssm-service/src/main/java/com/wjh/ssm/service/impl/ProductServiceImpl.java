@@ -1,0 +1,29 @@
+package com.wjh.ssm.service.impl;
+
+import com.wjh.ssm.dao.IProductDao;
+import com.wjh.ssm.domain.Product;
+import com.wjh.ssm.service.IProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+@Service
+@Transactional
+public class ProductServiceImpl implements IProductService {
+
+@Autowired
+private IProductDao productDao;
+
+    @Override
+    public List<Product> findAll() throws Exception {
+        return productDao.findAll();
+    }
+
+    @Override
+    public void save(Product product) {
+        productDao.save(product);
+    }
+
+
+}
