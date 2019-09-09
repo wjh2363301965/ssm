@@ -21,7 +21,7 @@ private IProductDao productDao;
     }
 
     @Override
-    public void save(Product product) {
+    public void save(Product product)throws Exception {
         productDao.save(product);
     }
 
