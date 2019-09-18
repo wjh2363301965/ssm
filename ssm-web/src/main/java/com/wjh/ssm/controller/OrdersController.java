@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("orders")
+@RequestMapping("/orders")
 public class OrdersController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class OrdersController {
         return mv;
     }*/
 
-   @RequestMapping("findAll.do")
+   @RequestMapping("/findAll.do")
     public ModelAndView findAll(@RequestParam(name="page",required = true,defaultValue = "1") int page,@RequestParam(name="pageSize" ,required = true,defaultValue = "4") int size) throws Exception {
        ModelAndView mv = new ModelAndView();
        List<Orders> all =orderService.findAll(page,size);
@@ -38,6 +38,15 @@ public class OrdersController {
        mv.setViewName("orders-page-list");
        return mv;
 
+   }
+
+@RequestMapping("/findById.do")
+   public ModelAndView findById(@RequestParam(name = "id",required = true) String id) throws Exception {
+       ModelAndView mv = new ModelAndView();
+       Orders orders = orderService.findById(id);
+       mv.addObject("orders",orders);
+        mv.setViewName("orders-show");
+       return mv;
    }
 
 
