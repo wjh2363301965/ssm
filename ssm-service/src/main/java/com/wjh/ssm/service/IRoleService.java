@@ -8,4 +8,6 @@ public interface IRoleService {
 
 
     public List<Role> findAll() throws Exception;
+
+    void save(Role role) throws Exception;
 }

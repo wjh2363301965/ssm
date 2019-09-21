@@ -20,6 +20,9 @@ public interface IRolesDao {
     @Select("select * from role")
     List<Role> findAll() throws  Exception;
 
+    @Insert("insert into role values(#{id},#{roleName},#{roleDesc})")
+    void save(Role role) throws  Exception;
+
 
 
 

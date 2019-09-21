@@ -1,5 +1,6 @@
 package com.wjh.ssm.service.impl;
 
+import com.wjh.ssm.dao.IRolesDao;
 import com.wjh.ssm.dao.IUserDao;
 import com.wjh.ssm.domain.Role;
 import com.wjh.ssm.domain.UserInfo;
@@ -23,6 +24,8 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private IUserDao userDao;
+
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -73,5 +76,21 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserInfo findById(String id) {
       return   userDao.findById(id);
+    }
+
+    @Override
+    public List<Role> findOtherRoles(String id) {
+       return userDao.findOtherRoles(id);
+    }
+
+    @Override
+    public void addRoleToUser(String userId, String[] roleId) {
+
+        for (String s : roleId) {
+            userDao.addRoleToUser(userId,s);
+
+        }
+
+
     }
 }

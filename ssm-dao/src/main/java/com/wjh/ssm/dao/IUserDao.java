@@ -1,6 +1,7 @@
 package com.wjh.ssm.dao;
 
 
+import com.wjh.ssm.domain.Role;
 import com.wjh.ssm.domain.UserInfo;
 import org.apache.ibatis.annotations.*;
 
@@ -54,4 +55,12 @@ public interface IUserDao {
             @Result(property = "roles", column = "id", javaType = java.util.List.class, many = @Many(select = "com.wjh.ssm.dao.IRolesDao.findRoleByUserId"))
     })
     UserInfo findById(String id);
+
+
+    @Select("select * from role where id not in (select roleId from users_role where userId=#{id})")
+    List<Role> findOtherRoles(String id);
+
+
+    @Insert("insert into users_role values(#{userId},#{s})")
+    void addRoleToUser(@Param("userId") String userId,@Param("s") String s);
 }
