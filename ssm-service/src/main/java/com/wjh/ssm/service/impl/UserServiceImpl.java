@@ -14,7 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -67,8 +70,11 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void save(UserInfo userInfo) throws Exception{
        UUID uuid = new UUID(100,50);
-
-       userInfo.setId(uuid.toString());
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        StringBuilder sb = new StringBuilder(uuid.toString());
+        String format = dateFormat.format(new Date());
+       userInfo.setId(sb.append(format).toString());
        userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));
         userDao.save(userInfo);
     }

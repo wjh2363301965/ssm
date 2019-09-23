@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +28,9 @@ public class PermissionServiceImpl implements IPermissionService {
     @Override
     public void save(Permission p) {
         UUID uuid = new UUID(50,20);
-        p.setId(uuid.toString());
+        DateFormat format =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format1 = format.format(new Date());
+        p.setId(uuid.toString()+format1);
         permissionDao.save(p);
     }
 }

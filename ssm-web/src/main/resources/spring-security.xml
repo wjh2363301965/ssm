@@ -7,9 +7,12 @@
     http://www.springframework.org/schema/security
     http://www.springframework.org/schema/security/spring-security.xsd">
 
+    <security:global-method-security jsr250-annotations="enabled"></security:global-method-security>
+
     <!-- 配置不拦截的资源 -->
     <security:http pattern="/login.jsp" security="none"/>
     <security:http pattern="/failer.jsp" security="none"/>
+    <security:http pattern="/403.jsp" security="none"/>
     <security:http pattern="/css/**" security="none"/>
     <security:http pattern="/img/**" security="none"/>
     <security:http pattern="/plugins/**" security="none"/>
@@ -51,6 +54,8 @@
 
     <!-- 配置加密类 -->
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+    <!--用于控制页面那些标签可以显示那些可以不显示第二种方法配置此bean，第一种是把disabled改成false，角色加spel表达式-->
+    <bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
 
     <!-- 提供了入门的方式，在内存中存入用户名和密码
     <security:authentication-manager>

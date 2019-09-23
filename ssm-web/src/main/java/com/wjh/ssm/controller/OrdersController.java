@@ -29,7 +29,7 @@ public class OrdersController {
     }*/
 
    @RequestMapping("/findAll.do")
-    public ModelAndView findAll(@RequestParam(name="page",required = true,defaultValue = "1") int page,@RequestParam(name="pageSize" ,required = true,defaultValue = "4") int size) throws Exception {
+    public ModelAndView findAll(@RequestParam(name="page",required = true,defaultValue = "1") Integer page,@RequestParam(name="pageSize" ,required = true,defaultValue = "4") Integer size) throws Exception {
        ModelAndView mv = new ModelAndView();
        List<Orders> all =orderService.findAll(page,size);
        //pageInfo里面包括list（all）但自己的属性里额外多了分页的属性，执行有参构造就会创建出来，添加一个对应的list

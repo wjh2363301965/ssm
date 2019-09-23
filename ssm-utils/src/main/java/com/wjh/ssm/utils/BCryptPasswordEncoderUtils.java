@@ -2,6 +2,11 @@ package com.wjh.ssm.utils;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 public class BCryptPasswordEncoderUtils {
@@ -13,15 +18,11 @@ public class BCryptPasswordEncoderUtils {
         return encode;
     }
 
-    public static void main(String[] args) {
-        String password="jianhao";
-        String s = encodePassword(password);
-        System.out.println(s);
-/*
-UUID uuid =new UUID(100L,50L);
-        String s = uuid.toString();
-        System.out.println(uuid);
-        System.out.println(s);
-*/
+    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<DateUtils> dateUtilsClass = DateUtils.class;
+        Class<BCryptPasswordEncoderUtils> b = BCryptPasswordEncoderUtils.class;
+
+        DateUtils cast = dateUtilsClass.cast(dateUtilsClass);
+
     }
 }

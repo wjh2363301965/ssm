@@ -1,5 +1,6 @@
 package com.wjh.ssm.dao;
 
+import com.wjh.ssm.domain.Permission;
 import com.wjh.ssm.domain.Role;
 import org.apache.ibatis.annotations.*;
 
@@ -22,6 +23,17 @@ public interface IRolesDao {
 
     @Insert("insert into role values(#{id},#{roleName},#{roleDesc})")
     void save(Role role) throws  Exception;
+
+
+    @Select("select * from role where id=#{id}")
+    Role findRoleById(String id);
+
+
+    @Select("select * from permission where id not in (select PermissionId from role_permission where roleId = #{id})")
+    List<Permission> findAllPermission(String id);
+
+    @Insert("insert into role_permission values (#{p},#{roleid})")
+    void addPermissionToRole(@Param("roleid") String roleId,@Param("p") String  p);
 
 
 

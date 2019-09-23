@@ -29,13 +29,13 @@ public class UserController {
     }
 
     //用户添加
-    @RequestMapping("save.do")
+    @RequestMapping("/save.do")
     public String save(UserInfo userInfo) throws Exception {
         userService.save(userInfo);
         return "redirect:findAll.do";
     }
 
-    @RequestMapping("findById.do")
+    @RequestMapping("/findById.do")
     public ModelAndView findById(String id) {
         ModelAndView mv = new ModelAndView();
         UserInfo u = userService.findById(id);
@@ -46,7 +46,7 @@ public class UserController {
 
     }
 
-    @RequestMapping("findUserByIdAndAllRole.do")
+    @RequestMapping("/findUserByIdAndAllRole.do")
     public ModelAndView findUserByIdAndAllRole(@RequestParam(name = "id", required = true) String Id) {
         ModelAndView mv = new ModelAndView();
         //1.根据用户id查询用户
@@ -60,7 +60,7 @@ public class UserController {
         return mv;
     }
 
-    @RequestMapping("addRoleToUser.do")
+    @RequestMapping("/addRoleToUser.do")
     public String addRoleToUser(@RequestParam(name = "userId", required = true) String userId, @RequestParam(name = "ids", required = true) String[] roleId) {
         userService.addRoleToUser(userId, roleId);
         return "redirect:findAll.do";
